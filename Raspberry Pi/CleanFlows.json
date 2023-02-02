@@ -1,0 +1,1050 @@
+[
+    {
+        "id": "4c8927a996e51367",
+        "type": "tab",
+        "label": "Ready",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d4238da0cbf7f4d8",
+        "type": "ui_chart",
+        "z": "4c8927a996e51367",
+        "name": "Temperature",
+        "group": "af321f0d17895010",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Temperature",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 650,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aaa849046d90f65f",
+        "type": "mqtt in",
+        "z": "4c8927a996e51367",
+        "name": "Temperature",
+        "topic": "Home/Temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ab8ece1b6c44c242",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "75cde3f6f75be1e7"
+            ]
+        ]
+    },
+    {
+        "id": "4e16e2f6c45c9c53",
+        "type": "mqtt in",
+        "z": "4c8927a996e51367",
+        "name": "Humidity",
+        "topic": "Home/Humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ab8ece1b6c44c242",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 260,
+        "wires": [
+            [
+                "f57faee35a0b19e9"
+            ]
+        ]
+    },
+    {
+        "id": "75cde3f6f75be1e7",
+        "type": "string",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "methods": [
+            {
+                "name": "delLeftMost",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "temp:"
+                    }
+                ]
+            }
+        ],
+        "prop": "payload",
+        "propout": "payload",
+        "object": "msg",
+        "objectout": "msg",
+        "x": 330,
+        "y": 160,
+        "wires": [
+            [
+                "3298f2bfb728fb83"
+            ]
+        ]
+    },
+    {
+        "id": "3298f2bfb728fb83",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "func": "msg.payload = parseFloat(msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 160,
+        "wires": [
+            [
+                "d4238da0cbf7f4d8",
+                "a8cc4a5d149921e5",
+                "5d60c7f29a596aae",
+                "fbb15b3959209511"
+            ]
+        ]
+    },
+    {
+        "id": "273738830df2446b",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "func": "msg.payload = parseFloat(msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 260,
+        "wires": [
+            [
+                "cd6a14f652787c12",
+                "f4e425010d742af4",
+                "70edb00b9b7aa580",
+                "3282051a1b939be7"
+            ]
+        ]
+    },
+    {
+        "id": "f57faee35a0b19e9",
+        "type": "string",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "methods": [
+            {
+                "name": "delLeftMost",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "humi:"
+                    }
+                ]
+            }
+        ],
+        "prop": "payload",
+        "propout": "payload",
+        "object": "msg",
+        "objectout": "msg",
+        "x": 330,
+        "y": 260,
+        "wires": [
+            [
+                "273738830df2446b"
+            ]
+        ]
+    },
+    {
+        "id": "cd6a14f652787c12",
+        "type": "ui_gauge",
+        "z": "4c8927a996e51367",
+        "name": "Humidity",
+        "group": "af321f0d17895010",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "Humidity",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100.0",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 640,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "f4e425010d742af4",
+        "type": "debug",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a8cc4a5d149921e5",
+        "type": "debug",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "70edb00b9b7aa580",
+        "type": "ui_chart",
+        "z": "4c8927a996e51367",
+        "name": "Humidity",
+        "group": "af321f0d17895010",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Humidity",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 640,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5d60c7f29a596aae",
+        "type": "debug",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "fbb15b3959209511",
+        "type": "change",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temperature",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 200,
+        "wires": [
+            [
+                "3da556bb887f9d27"
+            ]
+        ]
+    },
+    {
+        "id": "651a5681f376d669",
+        "type": "telegram event",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "bot": "c78617f85e9f789d",
+        "event": "callback_query",
+        "autoanswer": false,
+        "x": 180,
+        "y": 600,
+        "wires": [
+            [
+                "1391c56efd243812"
+            ]
+        ]
+    },
+    {
+        "id": "1391c56efd243812",
+        "type": "switch",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "property": "payload.content",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "humi",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "both",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 370,
+        "y": 600,
+        "wires": [
+            [
+                "c6a98830eaa3384c"
+            ],
+            [
+                "64b52391fb51439a"
+            ],
+            [
+                "518c52e62b6f0a33"
+            ]
+        ]
+    },
+    {
+        "id": "c6a98830eaa3384c",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "temp",
+        "func": "var chatId = msg.payload.chatId;\n\nreturn {\n    payload: {\n        chatId: chatId,\n        type: 'message',\n        content: 'Temperature: ' + flow.get(\"temperature\") + '°C'\n        }\n    };",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 540,
+        "wires": [
+            [
+                "590b1923283e49dc"
+            ]
+        ]
+    },
+    {
+        "id": "590b1923283e49dc",
+        "type": "telegram sender",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "bot": "c78617f85e9f789d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 730,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "64b52391fb51439a",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "humi",
+        "func": "var chatId = msg.payload.chatId;\n\nreturn {\n    payload: {\n        chatId: chatId,\n        type: 'message',\n        content: 'Humidity: ' + flow.get(\"humidity\") + '%'\n        }\n    };",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 600,
+        "wires": [
+            [
+                "590b1923283e49dc"
+            ]
+        ]
+    },
+    {
+        "id": "518c52e62b6f0a33",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "both",
+        "func": "var chatId = msg.payload.chatId;\nvar message = \"\";\nmessage += \"\\r\\n\" + \"Temperature: \" + flow.get(\"temperature\") + '°C';\nmessage += \"\\r\\n\" + \"Humidity: \" + flow.get(\"humidity\") + '%';\n\nreturn {\n    payload: {\n        chatId: chatId,\n        type: 'message',\n        content: message\n        }\n    };",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 660,
+        "wires": [
+            [
+                "590b1923283e49dc"
+            ]
+        ]
+    },
+    {
+        "id": "5bf760fa856b792a",
+        "type": "telegram command",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "command": "/sensor",
+        "description": "Inlinekeyboard that accesses sensory data",
+        "registercommand": true,
+        "language": "",
+        "scope": "default",
+        "bot": "c78617f85e9f789d",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 150,
+        "y": 440,
+        "wires": [
+            [
+                "80f575739701843c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "80f575739701843c",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "Inline Keyboard",
+        "func": "\nvar keyboard = {\n    reply_markup: JSON.stringify({\n        \"inline_keyboard\": [\n            [\n                {\n                    \"text\": \"Temperature\",\n                    \"callback_data\": \"temp\"\n                },\n                {\n                    \"text\": \"Humidity\",\n                    \"callback_data\": \"humi\"\n                },\n                {\n                    \"text\": \"All data\",\n                    \"callback_data\": \"both\"\n                }\n            ]\n        ]\n    })\n};\n\nmsg.payload.content = \"This keyboard accesses the sensory data:\";\nmsg.payload.options = keyboard;\nmsg.payload.type = \"message\";\n\nreturn [msg]\n\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 440,
+        "wires": [
+            [
+                "181325db5325cd70"
+            ]
+        ]
+    },
+    {
+        "id": "181325db5325cd70",
+        "type": "telegram sender",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "bot": "c78617f85e9f789d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 610,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3da556bb887f9d27",
+        "type": "debug",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "3282051a1b939be7",
+        "type": "change",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "humidity",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "06674606eaa5a37a",
+        "type": "telegram command",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "command": "/help",
+        "description": "Returns a list of supported commands",
+        "registercommand": true,
+        "language": "",
+        "scope": "default",
+        "bot": "c78617f85e9f789d",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 150,
+        "y": 760,
+        "wires": [
+            [
+                "25e7db141ec03348",
+                "fde0e27b4f599201"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "25e7db141ec03348",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "Simple command response",
+        "func": "var chatId = msg.payload.chatId;\nvar message = \"\";\nmessage += \"\\r\\n\" + \"/hello\";\nmessage +=  \" - \" + \"returns World!\";\nmessage += \"\\r\\n\" + \"Writing ’Hello’\";\nmessage +=  \" - \" + \"returns ’World!’ too\";\nmessage += \"\\r\\n\" + \"/loopOn\";\nmessage += \" - \" + \"turns the automatic message loop On\";\nmessage += \"\\r\\n\" + \"/loopOff\";\nmessage += \" - \" + \"turns the automatic message loop Off\";\nmessage += \"\\r\\n\" + \"/keyboard\";\nmessage += \" - \" + \"returns an tricky InlineKeyboard!\";\nvar response = {\n    payload: {\n        chatId: chatId,\n        type: \"message\",\n        content: message\n    }\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 760,
+        "wires": [
+            [
+                "9463298374563a57",
+                "f77e43b05ccce4a3"
+            ]
+        ]
+    },
+    {
+        "id": "9463298374563a57",
+        "type": "telegram sender",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "bot": "c78617f85e9f789d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 650,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f77e43b05ccce4a3",
+        "type": "debug",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "fde0e27b4f599201",
+        "type": "debug",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "beb4c0e9ef7275b5",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "Simple command response",
+        "func": "var chatId = msg.payload.chatId;\nvar response = {\n    payload: {\n        chatId: chatId,\n        type: \"message\",\n        content:\"World!\"\n    }\n}\n\nreturn response;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 940,
+        "wires": [
+            [
+                "ddc085e5b94401f2"
+            ]
+        ]
+    },
+    {
+        "id": "31bbcb0e63347c06",
+        "type": "telegram command",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "command": "/hello",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "c78617f85e9f789d",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 150,
+        "y": 940,
+        "wires": [
+            [
+                "beb4c0e9ef7275b5"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ddc085e5b94401f2",
+        "type": "telegram sender",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "bot": "c78617f85e9f789d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 650,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6860e702d31af160",
+        "type": "telegram sender",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "bot": "c78617f85e9f789d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 730,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0dff7b7ffc052896",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "Simple hello text response",
+        "func": "if (msg.payload.content == \"Hello\") {\n    msg.payload.content = \"World!\"\n    return msg\n} else {\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 1000,
+        "wires": [
+            [
+                "6860e702d31af160"
+            ]
+        ]
+    },
+    {
+        "id": "41c8086f478a31bb",
+        "type": "telegram receiver",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "bot": "c78617f85e9f789d",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 190,
+        "y": 1000,
+        "wires": [
+            [
+                "0dff7b7ffc052896"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "9be18a25479b27ef",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "Simple direct message",
+        "func": "return {\n    payload: {\n        chatId: 59221384,\n        type: 'message',\n        content: 'Hai Miri c:'\n        }\n    };",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 1100,
+        "wires": [
+            [
+                "c36846554716c0ea"
+            ]
+        ]
+    },
+    {
+        "id": "821ed0dfd4d1291f",
+        "type": "inject",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 1100,
+        "wires": [
+            [
+                "9be18a25479b27ef"
+            ]
+        ]
+    },
+    {
+        "id": "c36846554716c0ea",
+        "type": "telegram sender",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "bot": "c78617f85e9f789d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 1100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a5626faeca62e80c",
+        "type": "telegram sender",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "bot": "c78617f85e9f789d",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 710,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fec1c94d159eb102",
+        "type": "telegram receiver",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "bot": "c78617f85e9f789d",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 190,
+        "y": 1320,
+        "wires": [
+            [
+                "12aeb70735be1668"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "12aeb70735be1668",
+        "type": "function",
+        "z": "4c8927a996e51367",
+        "name": "Simple controlled loop response",
+        "func": "// Think how to exclude the commands in the loop \n// a little bit smarter xD\nif (msg.payload.content == \"/loopOn\") { \n    return\n}\nif (msg.payload.content == \"/loopOff\") { \n    return\n}\nif (flow.get(\"loopCondition\") == true) {\n    return msg\n} else {\n    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 1320,
+        "wires": [
+            [
+                "a5626faeca62e80c"
+            ]
+        ]
+    },
+    {
+        "id": "4ee7104ca2a4c8bb",
+        "type": "telegram command",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "command": "/loopOn",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "c78617f85e9f789d",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 150,
+        "y": 1200,
+        "wires": [
+            [
+                "6060c738b9bfe97d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6060c738b9bfe97d",
+        "type": "change",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "loopCondition",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fb3a6cb390cc953e",
+        "type": "telegram command",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "command": "/loopOff",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "c78617f85e9f789d",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 150,
+        "y": 1260,
+        "wires": [
+            [
+                "014a8e8fd4b0cc6b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "014a8e8fd4b0cc6b",
+        "type": "change",
+        "z": "4c8927a996e51367",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "loopCondition",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 1260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "af321f0d17895010",
+        "type": "ui_group",
+        "name": "Standard",
+        "tab": "a33616b107dab495",
+        "order": 1,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ab8ece1b6c44c242",
+        "type": "mqtt-broker",
+        "name": "10.10.10.199:1883 - Uni",
+        "broker": "10.10.10.199",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c78617f85e9f789d",
+        "type": "telegram bot",
+        "botname": "572665",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "a33616b107dab495",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
